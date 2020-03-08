@@ -144,6 +144,11 @@ bot.on('message', msg => {
                 active_reports.set(msg.author.tag, new Report(msg.author.tag, null, null, null, null));
                 ReportCommand(msg, false);
             }
+
+            // delete the !report message, if it was sent in a server
+            if(msg.channel instanceof Discord.TextChannel) {
+                msg.delete();
+            }
             break;
         case '!finish':
             // check if user has an active report already open
